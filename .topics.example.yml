@@ -1,0 +1,150 @@
+# .topics.example.yml
+# Copy to .topics.yml and customize your focus areas.
+# .topics.yml is gitignored — your weights and topics are personal.
+#
+# Weight: 1 (low priority) to 5 (drill this hard)
+# Subtopics: specific areas the agent picks from within each category
+
+topics:
+  react:
+    weight: 3
+    subtopics:
+      - Server Components (RSC) patterns
+      - Suspense & streaming SSR
+      - custom hooks design patterns
+      - reconciliation & virtual DOM diffing
+      - concurrent features (useTransition, useDeferredValue, useOptimistic)
+      - React Compiler (auto-memoization)
+      - performance tuning (memo, useMemo, useCallback tradeoffs)
+      - error boundaries & recovery patterns
+      - ref patterns (useImperativeHandle, callback refs)
+
+  nextjs:
+    weight: 3
+    subtopics:
+      - App Router architecture (layouts, pages, slots)
+      - Server Actions (mutations, revalidation, error handling)
+      - middleware (auth, redirects, geo-routing)
+      - caching layers (fetch cache, router cache, full route cache, data cache)
+      - ISR & on-demand revalidation (revalidatePath, revalidateTag)
+      - parallel & intercepting routes
+      - metadata API & SEO
+      - route handlers (streaming, auth, file uploads)
+      - PPR (partial prerendering)
+
+  typescript:
+    weight: 3
+    subtopics:
+      - generics & generic constraints
+      - discriminated unions & exhaustive checks
+      - conditional types & distributive behavior
+      - satisfies operator vs type annotation
+      - template literal types
+      - infer keyword patterns
+      - module augmentation & declaration merging
+      - as const & readonly patterns
+      - strict mode flags & their implications
+      - utility types deep dive (NoInfer, Awaited, etc.)
+
+  javascript:
+    weight: 2
+    subtopics:
+      - event loop (macrotasks vs microtasks, rendering pipeline)
+      - closures & lexical scope edge cases
+      - prototypal inheritance & class semantics
+      - WeakRef & FinalizationRegistry
+      - Proxy & Reflect patterns
+      - structuredClone vs spread vs JSON
+      - Iterator helpers & generator patterns
+      - Promise combinators (all, allSettled, race, any)
+      - module systems (ESM vs CJS interop, top-level await)
+
+  auth-security:
+    weight: 2
+    subtopics:
+      - OAuth 2.0 / OIDC flows (authorization code, PKCE)
+      - CSRF & XSS prevention strategies
+      - Content Security Policy (CSP) headers
+      - CORS (preflight, credentials, wildcards)
+      - JWT vs session-based auth tradeoffs
+      - secure cookie flags (HttpOnly, SameSite, Secure)
+      - rate limiting & brute force protection
+      - input sanitization (server vs client)
+
+  testing:
+    weight: 3
+    subtopics:
+      - Vitest / Jest configuration & patterns
+      - React Testing Library philosophy (user-centric queries)
+      - MSW (Mock Service Worker) for API mocking
+      - Playwright / Cypress E2E strategies
+      - testing custom hooks (renderHook)
+      - snapshot testing tradeoffs
+      - coverage pitfalls (lines vs branches vs meaningful coverage)
+      - component integration tests vs unit tests
+
+  devops-cicd:
+    weight: 2
+    subtopics:
+      - Docker multi-stage builds for frontend
+      - GitHub Actions workflows & caching
+      - environment variable management (build-time vs runtime)
+      - Turborepo / Nx build caching & task pipelines
+      - preview deployments (Vercel, Netlify)
+      - linting & formatting pipelines (ESLint, Prettier, lint-staged)
+
+  system-design:
+    weight: 3
+    subtopics:
+      - component architecture (compound, headless, polymorphic)
+      - state management patterns (server state vs client state)
+      - micro-frontends (module federation, architecture tradeoffs)
+      - BFF pattern & API gateway
+      - caching layers (CDN, edge, application, browser)
+      - optimistic updates & conflict resolution
+      - error handling architecture (error boundaries, retry, fallbacks)
+      - real-time patterns (WebSockets, SSE, polling)
+
+  performance:
+    weight: 3
+    subtopics:
+      - Core Web Vitals (LCP, CLS, INP) optimization
+      - bundle analysis & reduction strategies
+      - code splitting (route-based, component-based, conditional)
+      - lazy loading patterns (components, images, data)
+      - image optimization (formats, sizing, next/image)
+      - font loading strategies (display swap, preload, subsetting)
+      - prefetch & preconnect strategies
+      - runtime performance (long tasks, layout thrashing, virtualization)
+
+  accessibility:
+    weight: 2
+    subtopics:
+      - ARIA patterns (roles, states, properties, live regions)
+      - keyboard navigation & focus management
+      - screen reader testing & announcements
+      - semantic HTML (landmarks, headings hierarchy)
+      - color contrast & visual accessibility
+      - focus trapping (modals, drawers)
+      - accessible forms (labels, errors, descriptions)
+
+  api-design:
+    weight: 2
+    subtopics:
+      - REST conventions (status codes, resource naming, HATEOAS)
+      - GraphQL schema design & resolver patterns
+      - tRPC (type-safe APIs, routers, procedures)
+      - API versioning strategies
+      - pagination patterns (cursor vs offset, infinite scroll)
+      - error response formats & error codes
+      - rate limiting & throttling (client & server)
+
+  package-management:
+    weight: 1
+    subtopics:
+      - pnpm workspaces & dependency hoisting
+      - Turborepo (task pipelines, remote caching)
+      - changesets (versioning, changelogs)
+      - peer dependencies & version resolution
+      - barrel exports anti-pattern & tree shaking
+      - bundler configuration (Vite, webpack, esbuild)

@@ -46,20 +46,26 @@ After grading, share **3 useful nuggets**: tips, conventions, gotchas, patterns,
 
 ## Topic Pool
 
-Rotate across these categories. Track which categories have been covered to ensure breadth:
+Read the personal topic pool from `.topics.yml` in the project root. This YAML file defines categories, sub-topics, and weights (1-5) that are personal to each developer.
 
-- **React** — Server Components, Suspense, hooks patterns, reconciliation, concurrent features, React Compiler, performance
-- **Next.js** — App Router, Server Actions, middleware, caching (fetch/router/full-route), ISR, parallel/intercepting routes, metadata API
-- **TypeScript** — generics, discriminated unions, conditional types, `satisfies`, template literals, `infer`, module augmentation, `as const`, strict mode patterns
-- **JavaScript** — event loop, closures, prototypal inheritance, WeakRef/FinalizationRegistry, Proxy/Reflect, structuredClone, Iterator helpers, Promise subtleties
-- **Auth & Security** — OAuth 2.0/OIDC, CSRF/XSS prevention, CSP headers, CORS, JWT vs session, PKCE, secure cookie flags, rate limiting, input sanitization
-- **Testing** — Jest/Vitest patterns, React Testing Library philosophy, MSW, Playwright/Cypress strategies, testing hooks, snapshot testing tradeoffs, coverage pitfalls
-- **DevOps/CI-CD** — Docker multi-stage builds, GitHub Actions, environment variables, caching strategies, preview deployments, Turborepo/Nx, linting/formatting pipelines
-- **System Design** — component architecture, state management patterns, micro-frontends, BFF pattern, API gateway, caching layers, optimistic updates, error boundaries
-- **Performance & Web Vitals** — LCP/CLS/INP, bundle analysis, code splitting, lazy loading, image optimization, font loading, prefetch strategies
-- **Accessibility** — ARIA patterns, keyboard navigation, focus management, screen reader testing, semantic HTML, color contrast, live regions
-- **API Design** — REST conventions, GraphQL schema design, tRPC, API versioning, pagination patterns, error response formats
-- **Package Management & Monorepos** — pnpm workspaces, Turborepo, changesets, peer dependencies, barrel exports anti-pattern, tree shaking
+If `.topics.yml` doesn't exist, tell the user to create one:
+```
+cp .topics.example.yml .topics.yml
+```
+
+### Weight-based selection
+
+Use category weights to influence how often each category is picked:
+- **Weight 5**: high priority — select ~40% of the time
+- **Weight 3**: normal rotation
+- **Weight 1**: low priority — only when other categories need rest
+
+### Selection rules
+
+1. Parse `.topics.yml` to get categories, their weights, and sub-topics
+2. Use weighted random selection, biased by weight values
+3. Pick sub-topics within the selected category for question specificity
+4. Cross-reference `stats.categories_covered` in `.progress.json` to ensure breadth — deprioritize over-represented categories
 
 ## Progress File Schema
 
@@ -113,6 +119,22 @@ When a question is missed or partial:
 - On correct after previous miss: `next_review` = +3 sessions
 - On correct again: remove from review queue (`next_review` = null)
 
+## Scripts
+
+Helper scripts live in `.claude/skills/fe-quiz/scripts/`. Use these for efficient progress management:
+
+- **stats.sh** — Parse `.progress.json` into readable stats. Run when user says "stats" or "progress".
+  ```bash
+  bash .claude/skills/fe-quiz/scripts/stats.sh
+  ```
+- **reset.sh** — Reset or migrate progress data.
+  ```bash
+  bash .claude/skills/fe-quiz/scripts/reset.sh --full     # fresh start
+  bash .claude/skills/fe-quiz/scripts/reset.sh --stats    # reset stats, keep history
+  bash .claude/skills/fe-quiz/scripts/reset.sh --review   # clear review queue
+  bash .claude/skills/fe-quiz/scripts/reset.sh --migrate  # add missing schema fields
+  ```
+
 ## Commands the User May Give
 
 - **"quiz me"** / **"fe quiz"** — run a full session (3 questions + 3 nuggets)
@@ -127,7 +149,7 @@ When a question is missed or partial:
 ## Important Notes
 
 - Be a teacher, not a quizmaster. The goal is learning, not gotchas.
-- If the user's answer is technically correct but uses different terminology, accept it.
+- If the user's answer is technically correct but uses different terminology, accept it. Offer suggestions to refine the user's answer.
 - When grading, be generous on partial credit but precise on what was missing.
 - Keep the whole session scannable — use formatting sparingly, no walls of text.
 - If progress.json gets corrupted, recreate it (don't crash).
