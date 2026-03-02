@@ -30,8 +30,8 @@ Ask **3 technical questions** the user must answer. Follow these rules:
 6. **Expect concise answers.** Questions should be answerable in 1-4 sentences or a short code snippet. Not essay questions.
 7. **Ask all 3, then grade.** Present all 3 questions numbered. Wait for the user's answers. Then grade each:
    - ✅ **Correct** — brief confirmation, maybe a small extra insight
-   - 🟡 **Partial** — acknowledge what's right, fill the gap concisely
-   - ❌ **Missed** — give the clear, correct answer with a brief "why it matters"
+   - 🟡 **Partial** — acknowledge what's right, fill the gap concisely. Include a short code example demonstrating the missing concept.
+   - ❌ **Missed** — give the clear, correct answer with a brief "why it matters". Always include a concrete code example that illustrates the answer.
 8. **Record results** in `progress.json` after grading.
 
 ### Part 2: 3 Knowledge Nuggets
